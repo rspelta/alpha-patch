@@ -1,5 +1,6 @@
 #!/bin/bash
 # patch v3
+set -x
 
 SUDO_PASSWORD="architech"
 
@@ -23,6 +24,11 @@ repo sync
 [ $? -eq 0 ] || { fix_error; }
 rm /home/architech/architech_sdk/architech/hachiko/yocto/meta-hachiko/conf/machine/hachiko.conf
 
+cd poky
+git log -n 1 | grep f1276b066223e7f501f7f711680215ff8edee252
+[ $? -eq 0 ] || { fix_error; }
+
+
 #
 # Hachiko-tiny Fix
 #
@@ -32,6 +38,11 @@ repo sync
 [ $? -eq 0 ] || { fix_error; }
 sed -i "s|Sysroot=/home/architech/architech_sdk/architech/hachiko-tiny/sysroot|Sysroot=/home/architech/architech_sdk/architech/hachiko-tiny/toolchain/sysroots/cortexa9hf-vfp-neon-poky-linux-uclibceabi|g" /home/architech/architech_sdk/architech/hachiko-tiny/workspace/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.yocto.sdk.ide.1467355974.prefs
 rm /home/architech/architech_sdk/architech/hachiko-tiny/yocto/meta-hachiko/conf/machine/hachiko64.conf
+
+cd poky
+git log -n 1 | grep f1276b066223e7f501f7f711680215ff8edee252
+[ $? -eq 0 ] || { fix_error; }
+
 
 #
 # Tibidabo Fix
@@ -45,6 +56,17 @@ echo -e '#!/bin/bash\nzenity --error --text "Hob not available for Tibidabo"\nex
 chmod 777 run_hob
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/tibidabo/sysroot/*"
 
+cd ${WORK_DIR}/tibidabo/yocto/poky
+git log -n 1 | grep 84c2763fa0bf08a83caa2c5ee532b5bef2ff918b
+[ $? -eq 0 ] || { fix_error; }
+cd ../meta-openembedded
+git log -n 1 | grep 40e0f371f3eb1628655c484feac0cebf810737b4
+[ $? -eq 0 ] || { fix_error; }
+cd ../meta-fsl-arm
+git log -n 1 | grep fb1681666fac9c096314cd01242be4613b7ff140
+[ $? -eq 0 ] || { fix_error; }
+
+
 #
 # Zedboard Fix
 #
@@ -55,6 +77,17 @@ repo sync
 cd ${WORK_DIR}/zedboard/splashscreen
 echo -e "The zedboard Board is a single-board computer based on Xilinx's Zynq device family. It uses a Xilinx Zynq Z-7020 device." > short_description.txt
 chmod 777 short_description.txt
+
+cd ${WORK_DIR}/zedboard/yocto/poky
+git log -n 1 | grep 75bed4086eb83f1d24c31392f3dd54aa5c3679b1
+[ $? -eq 0 ] || { fix_error; }
+cd ../meta-openembedded
+git log -n 1 | grep 40e0f371f3eb1628655c484feac0cebf810737b4
+[ $? -eq 0 ] || { fix_error; }
+cd ../meta-xilinx
+git log -n 1 | grep cb7329a596a5ab2d1392c1962f9975eeef8e4576
+[ $? -eq 0 ] || { fix_error; }
+
 
 #
 # Pengwyn Fix
