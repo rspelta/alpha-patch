@@ -23,6 +23,8 @@ cd ${WORK_DIR}/hachiko/yocto
 repo sync
 [ $? -eq 0 ] || { fix_error; }
 rm /home/architech/architech_sdk/architech/hachiko/yocto/meta-hachiko/conf/machine/hachiko.conf
+echo -e '#!/bin/bash\nfirefox http://architechboards-hachiko.readthedocs.org/en/latest/\nexit 0' > ../splashscreen/run_documentation
+chmod 777 ../splashscreen/run_documentation
 
 cd poky
 git log -n 1 | grep f1276b066223e7f501f7f711680215ff8edee252
@@ -38,6 +40,8 @@ repo sync
 [ $? -eq 0 ] || { fix_error; }
 sed -i "s|Sysroot=/home/architech/architech_sdk/architech/hachiko-tiny/sysroot|Sysroot=/home/architech/architech_sdk/architech/hachiko-tiny/toolchain/sysroots/cortexa9hf-vfp-neon-poky-linux-uclibceabi|g" /home/architech/architech_sdk/architech/hachiko-tiny/workspace/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.yocto.sdk.ide.1467355974.prefs
 rm /home/architech/architech_sdk/architech/hachiko-tiny/yocto/meta-hachiko/conf/machine/hachiko64.conf
+echo -e '#!/bin/bash\nfirefox http://architechboards-hachiko-tiny.readthedocs.org/en/latest/\nexit 0' > ../splashscreen/run_documentation
+chmod 777 ../splashscreen/run_documentation
 
 cd poky
 git log -n 1 | grep f1276b066223e7f501f7f711680215ff8edee252
@@ -54,6 +58,8 @@ repo sync
 cd ${WORK_DIR}/tibidabo/splashscreen
 echo -e '#!/bin/bash\nzenity --error --text "Hob not available for Tibidabo"\nexit 0' > run_hob
 chmod 777 run_hob
+echo -e '#!/bin/bash\nfirefox http://architechboards-tibidabo.readthedocs.org/en/latest/\nexit 0' > run_documentation
+chmod 777 run_documentation
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/tibidabo/sysroot/*"
 
 cd ${WORK_DIR}/tibidabo/yocto/poky
@@ -77,6 +83,8 @@ repo sync
 cd ${WORK_DIR}/zedboard/splashscreen
 echo -e "The zedboard Board is a single-board computer based on Xilinx's Zynq device family. It uses a Xilinx Zynq Z-7020 device." > short_description.txt
 chmod 777 short_description.txt
+echo -e '#!/bin/bash\nfirefox http://architechboards-zedboard.readthedocs.org/en/latest/\nexit 0' > run_documentation
+chmod 777 run_documentation
 
 cd ${WORK_DIR}/zedboard/yocto/poky
 git log -n 1 | grep 75bed4086eb83f1d24c31392f3dd54aa5c3679b1
@@ -95,7 +103,11 @@ git log -n 1 | grep cb7329a596a5ab2d1392c1962f9975eeef8e4576
 
 sed -i "s|sysroot=/opt/poky/1.2.1/sysroots/armv7a-vfp-neon-poky-linux-gnueabi|sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot|g" /opt/poky/1.2.1/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/pengwyn/sysroot/*"
-
+cd ${WORK_DIR}/pengwyn/splashscreen
+echo -e '#!/bin/bash\nfirefox http://architechboards-pengwyn.readthedocs.org/en/latest/\nexit 0' > run_documentation
+chmod 777 run_documentation
+echo -e '#!/bin/bash\nexit 0' > run_install
+chmod 777 run_install
 
 #
 # Ubuntu Fix
