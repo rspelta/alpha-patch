@@ -49,6 +49,22 @@ cd ${WORK_DIR}/zedboard/splashscreen
 echo -e "The zedboard Board is a single-board computer based on Xilinx's Zynq device family. It uses a Xilinx Zynq Z-7020 device." > short_description.txt
 chmod 777 short_description.txt
 
-zenity --info --text "Patch installed correctly."
+#
+# Pengwyn Fix
+#
+
+sed -i "s|sysroot=/opt/poky/1.2.1/sysroots/armv7a-vfp-neon-poky-linux-gnueabi|sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot|g" /opt/poky/1.2.1/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi
+
+SUDO_PASSWORD="architech"
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "echo -e \"architech\" > /etc/hostname"
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "sed -i \"s|architech-alpha|architech|g\" /etc/hosts"
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "hostname -F /etc/hostname"
+
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/pengwyn/sysroot/*"
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/tibidabo/sysroot/*"
+
+zenity --info --text "Patch installed correctly. Now the virtual machine will reboot."
+echo -e ${SUDO_PASSWORD} | sudo -S bash -c "reboot"
 
 exit 0
+
