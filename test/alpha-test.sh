@@ -15,14 +15,11 @@ USER_USED=`whoami`
 
 WORK_DIR=${HOME}/architech_sdk/architech
 
-#
-# Hachiko Fix
-#
-# EXTRA_IMAGE_FEATURES = "debug-tweaks tools-debug"
-# IMAGE_INSTALL_append = " tcf-agent gdbserver"
-
-cd ${WORK_DIR}/hachiko/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; )
+cp hachiko.local.conf ~/architech_sdk/architech/hachiko/yocto/build/conf/local.conf
+cp hachiko-tiny.local.conf ~/architech_sdk/architech/hachiko-tiny/yocto/build/conf/local.conf
+cp tibidabo.local.conf ~/architech_sdk/architech/tibidabo/yocto/build/conf/local.conf
+cp zedboard.local.conf ~/architech_sdk/architech/zedboard/yocto/build/conf/local.conf
+cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.conf
 
 #
 # Hachiko-tiny Fix
@@ -32,6 +29,17 @@ cd ${WORK_DIR}/hachiko/yocto
 
 cd ${WORK_DIR}/hachiko-tiny/yocto
 (source poky/oe-init-build-env; bitbake tiny-image; )
+
+
+#
+# Hachiko Fix
+#
+# EXTRA_IMAGE_FEATURES = "debug-tweaks tools-debug"
+# IMAGE_INSTALL_append = " tcf-agent gdbserver"
+
+cd ${WORK_DIR}/hachiko/yocto
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; )
+
 
 #
 # Tibidabo Fix
