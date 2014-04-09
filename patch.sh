@@ -1,6 +1,6 @@
 #!/bin/bash
 # patch v3
-set -x
+#set -x
 
 SUDO_PASSWORD="architech"
 
