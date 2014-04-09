@@ -1,6 +1,8 @@
 #!/bin/bash
 # patch v3
 
+SUDO_PASSWORD="architech"
+
 function fix_error {
     zenity --error --text "An error is occured please check your Internet connection and relaunch this script."
     exit 1
@@ -65,7 +67,6 @@ echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk
 #
 # Ubuntu Fix
 #
-SUDO_PASSWORD="architech"
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "echo -e \"architech\" > /etc/hostname"
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "sed -i \"s|architech-alpha|architech|g\" /etc/hosts"
 echo -e ${SUDO_PASSWORD} | sudo -S bash -c "hostname -F /etc/hostname"
