@@ -16,7 +16,6 @@ function internet_error {
     exit 1
 }
 
-sleep 500
 USER_USED=`whoami`
 
 [ "${USER_USED}" == "architech" ] || { zenity --error --text "Please launch this script with \"architech\" user, without sudo command"; exit 1; }
