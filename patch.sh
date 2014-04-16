@@ -60,7 +60,7 @@ echo -e '#!/bin/bash\nzenity --error --text "Hob not available for Tibidabo"\nex
 chmod 777 run_hob
 echo -e '#!/bin/bash\nfirefox http://architechboards-tibidabo.readthedocs.org/en/latest/\nexit 0' > run_documentation
 chmod 777 run_documentation
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/tibidabo/sysroot/*"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "rm -rf /home/architech/architech_sdk/architech/tibidabo/sysroot/*"
 
 cd ${WORK_DIR}/tibidabo/yocto/poky
 git log -n 1 | grep 84c2763fa0bf08a83caa2c5ee532b5bef2ff918b
@@ -102,7 +102,7 @@ git log -n 1 | grep cb7329a596a5ab2d1392c1962f9975eeef8e4576
 #
 
 sed -i "s|sysroot=/opt/poky/1.2.1/sysroots/armv7a-vfp-neon-poky-linux-gnueabi|sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot|g" /opt/poky/1.2.1/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "rm -rf /home/architech/architech_sdk/architech/pengwyn/sysroot/*"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "rm -rf /home/architech/architech_sdk/architech/pengwyn/sysroot/*"
 cd ${WORK_DIR}/pengwyn/splashscreen
 echo -e '#!/bin/bash\nfirefox http://architechboards-pengwyn.readthedocs.org/en/latest/\nexit 0' > run_documentation
 chmod 777 run_documentation
@@ -112,15 +112,15 @@ chmod 777 run_install
 #
 # Ubuntu Fix
 #
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "echo -e \"architech\" > /etc/hostname"
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "sed -i \"s|architech-alpha|architech|g\" /etc/hosts"
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "hostname -F /etc/hostname"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "echo -e \"architech\" > /etc/hostname"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "sed -i \"s|architech-alpha|architech|g\" /etc/hosts"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "hostname -F /etc/hostname"
 
 
 #
 # End
 #
 zenity --info --text "Patch installed correctly. Now the virtual machine will reboot."
-echo -e ${SUDO_PASSWORD} | sudo -S bash -c "reboot"
+echo -e ${SUDO_PASSWORD} | sudo -p "" -S bash -c "reboot"
 
 exit 0
