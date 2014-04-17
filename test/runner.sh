@@ -6,7 +6,7 @@ LOOP=1
 
 while [ ${LOOP} -eq 1 ] 
 do
-	sleep 5
+	sleep 60
 	STATUS=`ps -p ${1} | grep ${1}`
 	[ $? -eq 0 ] || { LOOP=0;  }
 	echo -n "."
