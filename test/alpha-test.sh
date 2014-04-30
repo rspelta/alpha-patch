@@ -4,14 +4,19 @@
 #
 #set -x
 
-function clean_up {
+function clean_up() {
 	echo "Exit forced"
 	exit 2
 }
 
+function clean_downloads() {
+    rm -f $(find . -name "*.done")
+    rm -f readline62-00*
+}
+
 trap clean_up SIGHUP SIGINT SIGTERM
 
-function internet_error {
+function internet_error() {
     zenity --error --text "An error is occured please check your Internet connection and relaunch this script."
     exit 1
 }
@@ -36,7 +41,7 @@ cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.c
 
 echo "***************** HACHIKO-TINY *********************"
 cd ${WORK_DIR}/hachiko-tiny/yocto
-(source poky/oe-init-build-env; bitbake tiny-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
+(source poky/oe-init-build-env; bitbake tiny-image; clean_downloads; )
 
 
 #
@@ -47,7 +52,7 @@ cd ${WORK_DIR}/hachiko-tiny/yocto
 
 echo "***************** HACHIKO *********************"
 cd ${WORK_DIR}/hachiko/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
 
 
 #
@@ -58,7 +63,7 @@ cd ${WORK_DIR}/hachiko/yocto
 
 echo "***************** TIBIDABO *********************"
 cd ${WORK_DIR}/tibidabo/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
 
 #
 # Zedboard Fix
@@ -68,7 +73,7 @@ cd ${WORK_DIR}/tibidabo/yocto
 
 echo "***************** ZEDBOARD *********************"
 cd ${WORK_DIR}/zedboard/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake u-boot-xlnx; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; bitbake u-boot-xlnx; clean_downloads; )
 
 #
 # Pengwyn Fix
@@ -77,6 +82,6 @@ cd ${WORK_DIR}/zedboard/yocto
 
 echo "***************** PENGWYN *********************"
 cd ${WORK_DIR}/pengwyn/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
 
 exit 0
