@@ -36,7 +36,7 @@ cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.c
 
 echo "***************** HACHIKO-TINY *********************"
 cd ${WORK_DIR}/hachiko-tiny/yocto
-(source poky/oe-init-build-env; bitbake tiny-image; )
+(source poky/oe-init-build-env; bitbake tiny-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
 
 
 #
@@ -47,7 +47,7 @@ cd ${WORK_DIR}/hachiko-tiny/yocto
 
 echo "***************** HACHIKO *********************"
 cd ${WORK_DIR}/hachiko/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
 
 
 #
@@ -58,7 +58,7 @@ cd ${WORK_DIR}/hachiko/yocto
 
 echo "***************** TIBIDABO *********************"
 cd ${WORK_DIR}/tibidabo/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
 
 #
 # Zedboard Fix
@@ -68,7 +68,7 @@ cd ${WORK_DIR}/tibidabo/yocto
 
 echo "***************** ZEDBOARD *********************"
 cd ${WORK_DIR}/zedboard/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; bitbake u-boot-xlnx; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake u-boot-xlnx; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
 
 #
 # Pengwyn Fix
@@ -77,6 +77,6 @@ cd ${WORK_DIR}/zedboard/yocto
 
 echo "***************** PENGWYN *********************"
 cd ${WORK_DIR}/pengwyn/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; bitbake qt4e-demo-image; )
+(source poky/oe-init-build-env; bitbake core-image-minimal-dev; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; bitbake qt4e-demo-image; rm ~/architech_sdk/architech/hachiko/yocto/build/downloads/*.done; )
 
 exit 0
