@@ -4,6 +4,8 @@
 #
 #set -x
 
+exec > output.log 2>&1
+
 function clean_up() {
 	echo "Exit forced"
 	exit 2
@@ -42,7 +44,6 @@ cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.c
 echo "***************** HACHIKO-TINY *********************"
 cd ${WORK_DIR}/hachiko-tiny/yocto
 (source poky/oe-init-build-env; bitbake tiny-image; clean_downloads; )
-
 
 #
 # Hachiko Fix
