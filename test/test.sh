@@ -34,16 +34,7 @@ cp hachiko-tiny.local.conf ~/architech_sdk/architech/hachiko-tiny/yocto/build/co
 cp tibidabo.local.conf ~/architech_sdk/architech/tibidabo/yocto/build/conf/local.conf
 cp zedboard.local.conf ~/architech_sdk/architech/zedboard/yocto/build/conf/local.conf
 cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.conf
-
-#
-# Hachiko-tiny Fix
-#
-# EXTRA_IMAGE_FEATURES = "tools-debug"
-# IMAGE_INSTALL_append = " tcf-agent"
-
-echo "***************** HACHIKO-TINY *********************"
-cd ${WORK_DIR}/hachiko-tiny/yocto
-(source poky/oe-init-build-env; bitbake tiny-image; clean_downloads; )
+cp microzed.local.conf ~/architech_sdk/architech/microzed/yocto/build/conf/local.conf
 
 #
 # Hachiko Fix
@@ -53,8 +44,17 @@ cd ${WORK_DIR}/hachiko-tiny/yocto
 
 echo "***************** HACHIKO *********************"
 cd ${WORK_DIR}/hachiko/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
 
+#
+# Hachiko-tiny Fix
+#
+# EXTRA_IMAGE_FEATURES = "tools-debug"
+# IMAGE_INSTALL_append = " tcf-agent"
+
+echo "***************** HACHIKO-TINY *********************"
+cd ${WORK_DIR}/hachiko-tiny/yocto
+(source poky/oe-init-build-env && bitbake tiny-image; clean_downloads; )
 
 #
 # Tibidabo Fix
@@ -64,7 +64,7 @@ cd ${WORK_DIR}/hachiko/yocto
 
 echo "***************** TIBIDABO *********************"
 cd ${WORK_DIR}/tibidabo/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
 
 #
 # Zedboard Fix
@@ -74,7 +74,7 @@ cd ${WORK_DIR}/tibidabo/yocto
 
 echo "***************** ZEDBOARD *********************"
 cd ${WORK_DIR}/zedboard/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; bitbake u-boot-xlnx; clean_downloads; )
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; bitbake u-boot-xlnx; clean_downloads; )
 
 #
 # Pengwyn Fix
@@ -83,6 +83,15 @@ cd ${WORK_DIR}/zedboard/yocto
 
 echo "***************** PENGWYN *********************"
 cd ${WORK_DIR}/pengwyn/yocto
-(source poky/oe-init-build-env; bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; bitbake qt4e-demo-image; clean_downloads; )
+
+#
+# Microzed Fix
+#
+# IMAGE_INSTALL_append = " tcf-agent gdbserver"
+
+echo "***************** MICROZED *********************"
+cd ${WORK_DIR}/microzed/yocto
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; )
 
 exit 0
