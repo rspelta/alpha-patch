@@ -2,9 +2,8 @@
 #
 # Script to fix the virtual machine alpha
 #
-#set -x
+set -x
 
-exec > output.log 2>&1
 
 function clean_up() {
 	echo "Exit forced"
