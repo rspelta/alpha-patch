@@ -28,12 +28,29 @@ USER_USED=`whoami`
 
 WORK_DIR=${HOME}/architech_sdk/architech
 
-cp hachiko.local.conf ~/architech_sdk/architech/hachiko/yocto/build/conf/local.conf
-cp hachiko-tiny.local.conf ~/architech_sdk/architech/hachiko-tiny/yocto/build/conf/local.conf
-cp tibidabo.local.conf ~/architech_sdk/architech/tibidabo/yocto/build/conf/local.conf
-cp zedboard.local.conf ~/architech_sdk/architech/zedboard/yocto/build/conf/local.conf
-cp pengwyn.local.conf ~/architech_sdk/architech/pengwyn/yocto/build/conf/local.conf
-cp microzed.local.conf ~/architech_sdk/architech/microzed/yocto/build/conf/local.conf
+#
+# Galileo Fix
+#
+
+echo "***************** GALILEO *********************"
+cd ${WORK_DIR}/galileo/yocto
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; )
+
+#
+# Imx6sxsabresd Fix
+#
+
+echo "***************** IMX6SXSABRESD *********************"
+cd ${WORK_DIR}/imx6sxsabresd/yocto
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; )
+
+#
+# Picozed Fix
+#
+
+echo "***************** PICOZED *********************"
+cd ${WORK_DIR}/picozed/yocto
+(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; )
 
 #
 # Hachiko Fix
