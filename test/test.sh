@@ -29,16 +29,10 @@ USER_USED=`whoami`
 WORK_DIR=${HOME}/architech_sdk/architech
 
 #
-# Galileo Fix
-#
-
-echo "***************** GALILEO *********************"
-cd ${WORK_DIR}/galileo/yocto
-(source poky/oe-init-build-env && bitbake core-image-minimal-dev; clean_downloads; )
-
-#
 # Imx6sxsabresd Fix
 #
+# EXTRA_IMAGE_FEATURES = "tools-debug"
+# IMAGE_INSTALL_append = " tcf-agent gdbserver"
 
 echo "***************** IMX6SXSABRESD *********************"
 cd ${WORK_DIR}/imx6sxsabresd/yocto
@@ -47,6 +41,8 @@ cd ${WORK_DIR}/imx6sxsabresd/yocto
 #
 # Picozed Fix
 #
+# EXTRA_IMAGE_FEATURES = "tools-debug"
+# IMAGE_INSTALL_append = " tcf-agent gdbserver"
 
 echo "***************** PICOZED *********************"
 cd ${WORK_DIR}/picozed/yocto
